@@ -1,5 +1,6 @@
+import React, { useState } from 'react';
 import PropTypes from "prop-types";
-import { Layout, Flex, Image, Input } from "antd";
+import { Menu, Layout, Flex, Image, Input } from "antd";
 import {
   SearchOutlined,
   HeartOutlined,
@@ -7,7 +8,97 @@ import {
 } from "@ant-design/icons";
 const { Header, Content, Footer } = Layout;
 
+const items = [
+  {
+    label: 'Electronics',
+    key: 'mail',
+  },
+  {
+    label: 'Clothing',
+    key: 'app',
+
+  },
+  {
+    label: 'Smartphones',
+    key: 'app',
+
+  },
+  {
+    label: 'Laptops',
+    key: 'app',
+
+  },
+  {
+    label: 'T-shirts',
+    key: 'app',
+
+  },
+  {
+    label: 'Jeans',
+    key: 'app',
+
+  },
+  {
+    label: 'Fiction',
+    key: 'app',
+
+  },
+  {
+    label: 'Non-fiction',
+    key: 'app',
+
+  },
+  {
+    label: 'Books',
+    key: 'SubMenu',
+    children: [
+      {
+        type: 'group',
+        label: 'Item 1',
+        children: [
+          {
+            label: 'Option 1',
+            key: 'setting:1',
+          },
+          {
+            label: 'Option 2',
+            key: 'setting:2',
+          },
+        ],
+      },
+      {
+        type: 'group',
+        label: 'Item 2',
+        children: [
+          {
+            label: 'Option 3',
+            key: 'setting:3',
+          },
+          {
+            label: 'Option 4',
+            key: 'setting:4',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    label: (
+      <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
+        Navigation Four - Link
+      </a>
+    ),
+    key: 'alipay',
+  },
+];
+
 function AppLayout({ children }) {
+
+  const [current, setCurrent] = useState('mail');
+  const onClick = (e) => {
+    console.log('click ', e);
+    setCurrent(e.key);
+  };
 
   return (
     <Layout>
@@ -112,6 +203,29 @@ function AppLayout({ children }) {
                 </Flex>
               </Flex>
             </Flex>
+          </Flex>
+        </Flex>
+        <Flex style={{ width: "100%", justifyContent: "center" }}>
+          <Flex
+            className="bottomBarWrapper"
+            style={{
+              alignItems: "center",
+              width: "100%",
+              maxWidth: "1170px",
+              justifyContent: "space-between",
+              fontSize: "13px",
+              fontFamily: "montserrat, sans-serif",
+              marginLeft: "10px",
+              marginRight: "10px",
+            }}
+          >
+            <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} style={{
+              width: "100%",
+              textTransform: 'uppercase',
+              fontWeight: 500,
+              display: 'flex',
+              justifyContent: 'space-evenly'
+            }} />
           </Flex>
         </Flex>
       </Header>
