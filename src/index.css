@@ -1,39 +1,39 @@
-body{
-    margin: 0;
+body {
+  margin: 0;
 }
 
 a {
-    text-decoration: none;
-    color: rgba(0, 0, 0, .8);
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.8);
 }
 
 .searchInput::placeholder {
-    font-size: 5px; /* Adjust the font size as needed */
+  font-size: 5px; /* Adjust the font size as needed */
 }
 
 @media only screen and (max-width: 991px) {
-    .topBarWrapper {
-        display: none;
-    }
+  .topBarWrapper {
+    display: none;
+  }
 }
 
 @media only screen and (max-width: 786px) {
-.bottomBarWrapper{
+  .bottomBarWrapper {
     flex-direction: column;
-}
-    .bottomBarWrapper > div{
-        width: 100%;
-    }
+  }
+  .bottomBarWrapper > div {
+    width: 100%;
+  }
 }
 
 @media only screen and (max-width: 450px) {
-    .topBar{
-        display: none;
-    }
+  .topBar {
+    display: none;
+  }
 }
 
 @media only screen and (min-width: 451px) {
-    .miniIconOnHead{
-        display: none;
-    }
+  .miniIconOnHead {
+    display: none;
+  }
 }
