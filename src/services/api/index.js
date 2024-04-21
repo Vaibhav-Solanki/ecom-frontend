@@ -8,6 +8,18 @@ export function getCategories(level) {
   });
 }
 
+export function getCategory(categoryId) {
+  return useLazyQuery(querySchema.Category, {
+    variables: { categoryId },
+  });
+}
+
+export function getBrand(brandId) {
+  return useLazyQuery(querySchema.Brand, {
+    variables: { brandId },
+  });
+}
+
 export function getProducts() {
   return useLazyQuery(querySchema.Products);
 }

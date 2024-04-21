@@ -1,11 +1,22 @@
-import React from "react";
-import { Breadcrumb, Layout, theme, Flex, Menu, Select } from "antd";
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import {
+  Breadcrumb,
+  Layout,
+  theme,
+  Flex,
+  Menu,
+  Select,
+  Typography,
+} from "antd";
 import {
   LaptopOutlined,
   NotificationOutlined,
   UserOutlined,
 } from "@ant-design/icons";
 const { Content, Sider } = Layout;
+
+import { getCategory, getBrand } from "../../services/api/index.js";
 
 import ProductGrid from "./components/productGrid.jsx";
 
@@ -27,10 +38,20 @@ const items2 = [UserOutlined, LaptopOutlined, NotificationOutlined].map(
   },
 );
 
-const App = () => {
+export default function ProductPage() {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+
+  const { categoryId, brandId } = useParams();
+  const [runGetCategory, { data: categoryData }] = getCategory(+categoryId);
+  const [runGetBrand, { data: brandData }] = getBrand(+brandId);
+
+  useEffect(() => {
+    if (categoryId) runGetCategory();
+    if (brandId) runGetBrand();
+  }, [categoryId, brandId]);
+
   return (
     <Flex
       style={{
@@ -57,8 +78,17 @@ const App = () => {
             >
               <Breadcrumb>
                 <Breadcrumb.Item>Home</Breadcrumb.Item>
-                <Breadcrumb.Item>List</Breadcrumb.Item>
-                <Breadcrumb.Item>App</Breadcrumb.Item>
+                <Breadcrumb.Item>Product</Breadcrumb.Item>
+                {categoryId && <Breadcrumb.Item>Category</Breadcrumb.Item>}
+                {categoryId && (
+                  <Breadcrumb.Item>
+                    {categoryData?.category?.name}
+                  </Breadcrumb.Item>
+                )}
+                {brandId && <Breadcrumb.Item>Brand</Breadcrumb.Item>}
+                {brandId && (
+                  <Breadcrumb.Item>{brandData?.brand?.name}</Breadcrumb.Item>
+                )}
               </Breadcrumb>
               <Select
                 defaultValue="popular"
@@ -86,6 +116,36 @@ const App = () => {
                 ]}
               />
             </Flex>
+            {(categoryId || brandId) && (
+              <Flex
+                style={{
+                  margin: "16px",
+                  flexDirection: "column",
+                }}
+              >
+                <Typography
+                  style={{
+                    fontSize: "24px",
+                    textAlign: "left",
+                    float: "left",
+                    font: "700 25px montserrat-bold, sans-serif",
+                  }}
+                >
+                  {categoryId
+                    ? categoryData?.category?.name
+                    : brandData?.brand?.name}
+                </Typography>
+                <div
+                  style={{
+                    width: "117px",
+                    height: "2px",
+                    backgroundColor: "#fbd139",
+                    display: "block",
+                    margin: "6px 0 0 2px",
+                  }}
+                ></div>
+              </Flex>
+            )}
             <Layout
               style={{
                 padding: "24px 0",
@@ -97,6 +157,7 @@ const App = () => {
               <Sider
                 style={{
                   background: colorBgContainer,
+                  display: "none",
                 }}
                 width={200}
                 className={"hideLessThenTab"}
@@ -117,7 +178,7 @@ const App = () => {
                   minHeight: 280,
                 }}
               >
-                <ProductGrid />
+                <ProductGrid categoryId={categoryId} brandId={brandId} />
               </Content>
             </Layout>
           </Content>
@@ -125,5 +186,4 @@ const App = () => {
       </Flex>
     </Flex>
   );
-};
-export default App;
+}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Col, Row, Spin } from "antd";
+import { Col, Flex, Row, Spin, Typography } from "antd";
 import * as application from "../../../services/application/products.js";
 import * as api from "../../../services/api/index.js";
 
@@ -7,7 +7,7 @@ const PRODUCT_LIMIT = 12;
 
 import ProductCard from "./productCard.jsx";
 
-const App = () => {
+export default function ProductGrid({ categoryId, brandId }) {
   const [page, setPage] = useState({
     offset: 0,
     found: 1,
@@ -33,6 +33,8 @@ const App = () => {
   useEffect(() => {
     getData({
       variables: {
+        categoryId: categoryId ? Number(categoryId) : undefined,
+        brandId: brandId ? Number(brandId) : undefined,
         page: {
           offset: page.offset,
           limit: page.limit,
@@ -76,5 +78,4 @@ const App = () => {
       <Spin spinning={loading} fullscreen />
     </>
   );
-};
-export default App;
+}

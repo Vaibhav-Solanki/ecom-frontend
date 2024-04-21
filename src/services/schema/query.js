@@ -47,3 +47,23 @@ export const Products = gql`
     }
   }
 `;
+
+export const Category = gql`
+  query Category($categoryId: Int!) {
+    category(id: $categoryId) {
+      id
+      name
+      description
+    }
+  }
+`;
+
+export const Brand = gql`
+  query Brand($brandId: Int!) {
+    brand(id: $brandId) {
+      id
+      name
+      description
+    }
+  }
+`;
