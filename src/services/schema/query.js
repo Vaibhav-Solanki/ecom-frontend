@@ -25,3 +25,22 @@ export const Categories = gql`
     }
   }
 `;
+
+export const Products = gql`
+  query Products($categoryId: Int, $brandId: Int) {
+    products(category_id: $categoryId, brand_id: $brandId) {
+      id
+      name
+      description
+      stock_quantity
+      price
+      discounted_price
+      product_images {
+        url
+      }
+      brand {
+        name
+      }
+    }
+  }
+`;

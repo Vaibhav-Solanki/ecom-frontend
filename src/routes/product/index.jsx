@@ -64,7 +64,7 @@ const App = () => {
                 defaultValue="popular"
                 variant="borderless"
                 style={{
-                  minWidth: '160px'
+                  minWidth: "160px",
                 }}
                 options={[
                   {

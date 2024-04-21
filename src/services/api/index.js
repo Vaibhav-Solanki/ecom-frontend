@@ -8,6 +8,12 @@ export function getCategories(level) {
   });
 }
 
+export function getProducts({ categoryId, brandId }) {
+  return useQuery(querySchema.Products, {
+    variables: { categoryId, brandId },
+  });
+}
+
 export function updateCustomer({ name, picture }) {
   return useMutation(mutationSchema.UpdateCustomer, {
     variables: { name, picture },
