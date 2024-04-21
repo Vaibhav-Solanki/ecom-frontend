@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Image, Flex, Typography } from "antd";
+import { Card, Image, Flex, Typography, Button } from "antd";
 import { HeartOutlined } from "@ant-design/icons";
 
 const { Meta } = Card;
@@ -43,7 +43,13 @@ function ProductCard({ product }) {
             </Typography>
           </div>
           <div style={{ padding: "5px" }}>
-            <HeartOutlined style={{ fontSize: "22px" }} />
+            <Button
+              type="text"
+              shape="circle"
+              icon={
+                <HeartOutlined style={{ fontSize: "22px", color: "red" }} />
+              }
+            />
           </div>
         </Flex>
         <Flex style={{ alignItems: "center" }}>

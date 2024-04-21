@@ -1,6 +1,6 @@
 import * as api from "../api/index.js";
 
-function formatProducts(product) {
+export function formatProducts(product) {
   return {
     ...product,
     brand: product?.brand?.name,
@@ -9,7 +9,14 @@ function formatProducts(product) {
   };
 }
 
-export function getProducts(args = {}) {
-  const { loading, error, data } = api.getProducts(args);
-  return data?.products?.map(formatProducts);
+export function getProducts() {
+  const [getData, { loading, error, data }] = api.getProducts();
+
+  return {
+    getData,
+    loading,
+    error,
+    found: data?.products?.found,
+    products: data?.products?.products?.map(formatProducts) || [],
+  };
 }

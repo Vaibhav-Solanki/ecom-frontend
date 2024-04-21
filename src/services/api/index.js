@@ -8,10 +8,8 @@ export function getCategories(level) {
   });
 }
 
-export function getProducts({ categoryId, brandId }) {
-  return useQuery(querySchema.Products, {
-    variables: { categoryId, brandId },
-  });
+export function getProducts() {
+  return useLazyQuery(querySchema.Products);
 }
 
 export function updateCustomer({ name, picture }) {

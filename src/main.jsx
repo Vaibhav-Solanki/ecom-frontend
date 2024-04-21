@@ -14,9 +14,7 @@ const rootElement = document.getElementById("root");
 ReactDOM.createRoot(rootElement).render(
   <ApolloProvider client={graphQlClient}>
     <ConfigProvider>
-      <React.StrictMode>
-        <RouterProvider router={router} />
-      </React.StrictMode>
+      <RouterProvider router={router} />
     </ConfigProvider>
   </ApolloProvider>,
 );

@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes, { bool } from "prop-types";
-import { Layout, Flex, Image, Input } from "antd";
+import { Layout, Flex, Image, Input, FloatButton } from "antd";
 import Categories from "./components/categories.jsx";
 import {
   SearchOutlined,
@@ -123,7 +123,10 @@ function AppLayout({ children, subHeader, showFooter }) {
         </Flex>
         {subHeader && <Categories />}
       </Header>
-      <Content style={{ background: "white" }}>{children}</Content>
+      <Content style={{ background: "white" }}>
+        {children}
+        <FloatButton.BackTop />
+      </Content>
       {showFooter && (
         <Footer
           style={{
