@@ -59,6 +59,7 @@ export default function ProductPage() {
         justifyContent: "center",
         minHeight: "80vh",
       }}
+      key={window.location.pathname}
     >
       <Flex
         style={{

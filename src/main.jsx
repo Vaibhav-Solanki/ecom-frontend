@@ -13,7 +13,18 @@ import "./services/firebase.config.js";
 const rootElement = document.getElementById("root");
 ReactDOM.createRoot(rootElement).render(
   <ApolloProvider client={graphQlClient}>
-    <ConfigProvider>
+    <ConfigProvider
+      theme={{
+        token: {
+          // Seed Token
+          colorPrimary: "#faad14",
+          borderRadius: 2,
+
+          // Alias Token
+          colorBgContainer: "white",
+        },
+      }}
+    >
       <RouterProvider router={router} />
     </ConfigProvider>
   </ApolloProvider>,

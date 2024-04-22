@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Col, Flex, Row, Spin, Typography } from "antd";
-import { useLocation } from "react-router-dom";
 import * as application from "../../../services/application/products.js";
 import * as api from "../../../services/api/index.js";
 
@@ -11,8 +10,6 @@ const PRODUCT_LIMIT = 12;
 import ProductCard from "./productCard.jsx";
 
 export default function ProductGrid({ categoryId, brandId }) {
-  const location = useLocation();
-
   const [page, setPage] = useState({
     offset: 0,
     found: 1,
@@ -34,15 +31,6 @@ export default function ProductGrid({ categoryId, brandId }) {
       });
     }
   }
-
-  useEffect(() => {
-    setProductList([]);
-    setPage({
-      offset: 0,
-      found: 1,
-      limit: PRODUCT_LIMIT,
-    });
-  }, [location]);
 
   useEffect(() => {
     getData({
@@ -86,7 +74,7 @@ export default function ProductGrid({ categoryId, brandId }) {
   }, [data]);
 
   return (
-    <Flex key={window.location.pathname}>
+    <Flex>
       <Row gutter={[8, 8]}>
         {productList?.length > 0 &&
           productList?.map(

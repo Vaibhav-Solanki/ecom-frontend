@@ -150,6 +150,7 @@ function App() {
           width: "100%",
           fontSize: "11px",
           fontWeight: 600,
+          overflow:'auto'
         }}
       >
         {data.map((item) => (
@@ -169,7 +170,7 @@ function App() {
         <Typography style={{ fontWeight: 700, fontSize: "20px" }}>
           TRENDING CATEGORIES
         </Typography>
-        <Row gutter={[16, 16]}>
+        <Row gutter={[8, 8]}>
           <Col span={4} style={{}}>
             <Image src="https://ik.imagekit.io/itsVaibhav/d97907c2-dcbb-410b-9433-1feda9296947_kRSytBjJl.webp" />
           </Col>
