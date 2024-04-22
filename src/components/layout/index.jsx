@@ -1,6 +1,9 @@
 import React from "react";
 import PropTypes, { bool } from "prop-types";
 import { Layout, Flex, Image, Input, FloatButton } from "antd";
+
+import { Link } from "react-router-dom";
+
 import Categories from "./components/categories.jsx";
 import {
   SearchOutlined,
@@ -86,21 +89,33 @@ function AppLayout({ children, subHeader, showFooter }) {
           >
             <Flex className="topBar">
               <Flex style={{ marginRight: "20px" }}>
-                <Image
-                  height="20px"
-                  src="https://ik.imagekit.io/itsVaibhav/4acbe14b-a006-4a90-8b6b-45c8457fd661_ku4VDf1Q4.svg"
-                />
+                <Link to={"/"}>
+                  <Image
+                    height="20px"
+                    src="https://ik.imagekit.io/itsVaibhav/4acbe14b-a006-4a90-8b6b-45c8457fd661_ku4VDf1Q4.svg"
+                    preview={false}
+                  />
+                </Link>
               </Flex>
-              <Flex style={{ marginRight: "20px" }}>MEN</Flex>
-              <Flex style={{ marginRight: "20px" }}>WOMEN</Flex>
-              <Flex style={{ marginRight: "20px" }}>MOBILE COVERS</Flex>
+              <Link to={"/product/category/2"} style={{ marginRight: "20px" }}>
+                MEN
+              </Link>
+              <Link to={"/product/category/3"} style={{ marginRight: "20px" }}>
+                WOMEN
+              </Link>
+              <Link to={"/product/category/4"} style={{ marginRight: "20px" }}>
+                MOBILE COVERS
+              </Link>
             </Flex>
             <Flex style={{ alignItems: "center" }}>
               <Flex style={{ marginRight: "20px" }} className="miniIconOnHead">
-                <Image
-                  width="40px"
-                  src="https://ik.imagekit.io/itsVaibhav/cb4bac5b-63d7-4e4b-b17b-66a358db499a_TPZRLRQS3.svg"
-                />
+                <Link to={"/"}>
+                  <Image
+                    width="40px"
+                    src="https://ik.imagekit.io/itsVaibhav/cb4bac5b-63d7-4e4b-b17b-66a358db499a_TPZRLRQS3.svg"
+                    preview={false}
+                  />
+                </Link>
               </Flex>
               <Input
                 size="default size"
@@ -110,7 +125,9 @@ function AppLayout({ children, subHeader, showFooter }) {
                 style={{ fontSize: "inherit" }}
               />
               <Flex style={{ marginLeft: "20px" }}>
-                <Flex style={{ marginRight: "20px" }}>LOGIN</Flex>
+                <Link to={"/login"} style={{ marginRight: "20px" }}>
+                  LOGIN
+                </Link>
                 <Flex style={{ marginRight: "20px" }}>
                   <HeartOutlined />
                 </Flex>

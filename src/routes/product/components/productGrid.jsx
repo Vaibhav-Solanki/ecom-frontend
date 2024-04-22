@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Col, Flex, Row, Spin, Typography } from "antd";
+import { useLocation } from "react-router-dom";
 import * as application from "../../../services/application/products.js";
 import * as api from "../../../services/api/index.js";
+
+import { v4 as uuidv4 } from "uuid";
 
 const PRODUCT_LIMIT = 12;
 
 import ProductCard from "./productCard.jsx";
 
 export default function ProductGrid({ categoryId, brandId }) {
+  const location = useLocation();
+
   const [page, setPage] = useState({
     offset: 0,
     found: 1,
@@ -31,6 +36,15 @@ export default function ProductGrid({ categoryId, brandId }) {
   }
 
   useEffect(() => {
+    setProductList([]);
+    setPage({
+      offset: 0,
+      found: 1,
+      limit: PRODUCT_LIMIT,
+    });
+  }, [location]);
+
+  useEffect(() => {
     getData({
       variables: {
         categoryId: categoryId ? Number(categoryId) : undefined,
@@ -45,6 +59,15 @@ export default function ProductGrid({ categoryId, brandId }) {
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
+    return () => {
+      setProductList([]);
+      setPage({
+        offset: 0,
+        found: 1,
+        limit: PRODUCT_LIMIT,
+      });
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   useEffect(() => {
@@ -63,19 +86,19 @@ export default function ProductGrid({ categoryId, brandId }) {
   }, [data]);
 
   return (
-    <>
+    <Flex key={window.location.pathname}>
       <Row gutter={[8, 8]}>
         {productList?.length > 0 &&
           productList?.map(
             (product) =>
               product && (
-                <Col span={8} key={product.id}>
+                <Col span={8} key={uuidv4()}>
                   <ProductCard product={product} />
                 </Col>
               ),
           )}
       </Row>
       <Spin spinning={loading} fullscreen />
-    </>
+    </Flex>
   );
 }

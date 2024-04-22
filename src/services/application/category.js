@@ -1,6 +1,6 @@
 import * as api from "../api/index.js";
 
-function formatCategories(category) {
+export function formatCategories(category) {
   const row = {
     label: category.name,
     key: category.id,

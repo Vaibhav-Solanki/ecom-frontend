@@ -1,15 +1,25 @@
-import * as application from "../../../services/application/category.js";
+import * as api from "../../../services/api/index.js";
 import { Flex, Menu } from "antd";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+
+function formatCategories(category) {
+  const row = {
+    label: <Link to={`/product/category/${category.id}`}>{category.name}</Link>,
+    key: category.id,
+  };
+
+  if (category?.sub_category?.length > 0) {
+    row.children = category?.sub_category?.map(formatCategories);
+  }
+
+  return row;
+}
 
 export default function App() {
   const [current, setCurrent] = useState("mail");
-  const onClick = (e) => {
-    console.log("click ", e);
-    setCurrent(e.key);
-  };
 
-  const categories = application.getCategories(1);
+  const { loading, error, data: categories } = api.getCategories(1);
 
   return (
     <Flex
@@ -30,10 +40,9 @@ export default function App() {
         }}
       >
         <Menu
-          onClick={onClick}
           selectedKeys={[current]}
           mode="horizontal"
-          items={categories}
+          items={categories?.categories?.map(formatCategories)}
           style={{
             width: "100%",
             textTransform: "uppercase",
