@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { getMessaging, getToken } from 'firebase/messaging';
 import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
@@ -19,6 +20,11 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 export const analytics = getAnalytics(app);
 export const auth = getAuth(app);
+export const messaging = getMessaging(app);
+
+getToken(messaging, { vapidKey: import.meta.env.VITE_FCM_KEY }).then(currentToken => {
+  localStorage.setItem("fcmToken", currentToken)
+});
 
 auth.onIdTokenChanged(async (user) => {
   if (user) {
